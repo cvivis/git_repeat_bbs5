@@ -68,6 +68,12 @@ public class ArticleController {
         }
     }
 
+    @GetMapping("/{id}/delete")
+    public String delete(@PathVariable Long id){
+        articleRepository.deleteById(id);
+        return "redirect:/articles";
+    }
+
     @PostMapping("/{id}/update")
     public String updateArticle(@PathVariable Long id, ArticleDto form, Model model) {
         Article articleEntity = form.toEntity(id);
