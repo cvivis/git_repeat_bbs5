@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "article3")
@@ -18,13 +19,20 @@ public class Article {
 
     @Column
     private String title;
-
     @Column
     private String content;
+
+    @OneToMany
+    private List<Comment> comments;
 
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
     }
 
+    public Article(Long id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 }

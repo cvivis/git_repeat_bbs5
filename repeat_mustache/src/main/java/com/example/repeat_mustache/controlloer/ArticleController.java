@@ -1,8 +1,11 @@
 package com.example.repeat_mustache.controlloer;
 
 import com.example.repeat_mustache.domain.dto.ArticleDto;
+import com.example.repeat_mustache.domain.dto.CommentDto;
 import com.example.repeat_mustache.domain.entity.Article;
+import com.example.repeat_mustache.domain.entity.Comment;
 import com.example.repeat_mustache.repository.ArticleRepository;
+import com.example.repeat_mustache.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +24,11 @@ public class ArticleController {
 
     private final ArticleRepository articleRepository;
 // ArticleRepository는 interface지만 그 구현체(ArticleDao)를 SpringBoot가 넣어줍니다.
-    public ArticleController(ArticleRepository articleRepository) {
+
+    private final CommentRepository commentRepository;
+    public ArticleController(ArticleRepository articleRepository, CommentRepository commentRepository) {
         this.articleRepository = articleRepository;
+        this.commentRepository = commentRepository;
     }
 
     @GetMapping(value = "/new")
@@ -91,5 +97,17 @@ public class ArticleController {
         Article saved = articleRepository.save(articleEntity);
         log.info("generatedId:{}", saved.getId());
         return "redirect:/articles/" + saved.getId();
+    }
+
+    @PostMapping(value = "/{id}/comments")
+    public String createComment(@PathVariable Long id, CommentDto form){
+        log.info(form.toString());
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+        Comment commentEntity = form.toEntity();
+        log.info(commentEntity.toString());
+
+        Comment saved = commentRepository.save(commentEntity);
+        log.info("generatedId:{}",saved.getCommentId());
+        return "redirect:/articles/" + id ;
     }
 }
