@@ -42,7 +42,10 @@ public class ArticleController {
         Optional<Article> optArticle = articleRepository.findById(id); // null 값이 들어와도 nullPointExecption 발생 X
         if (!optArticle.isEmpty()) { // null 이 아닐때
             // Optional.get() ---> Article
+            List<Comment> comments = commentRepository.findByArticleId(id);
             model.addAttribute("article", optArticle.get()); // view article에 값 전달.
+            model.addAttribute("comments",comments);
+
             return "articles/show";
         } else {
             return "articles/error";
@@ -99,10 +102,24 @@ public class ArticleController {
         return "redirect:/articles/" + saved.getId();
     }
 
+//    @GetMapping("/{id}/comments")
+//    public String getComment(@PathVariable Long id,Model model){
+//        Optional<Article> optArticle = articleRepository.findById(id);
+//        if (!optArticle.isEmpty()) {
+//            // Optional.get() ---> Article
+//            model.addAttribute("article", optArticle.get());
+//            return "articles/comment";
+//        } else {
+//            model.addAttribute("message",String.format("%d가 없습니다." ,id));
+//            return "articles/error";
+//        }
+//    }
+
     @PostMapping(value = "/{id}/comments")
     public String createComment(@PathVariable Long id, CommentDto form){
         log.info(form.toString());
         Optional<Article> optionalArticle = articleRepository.findById(id);
+        form.setArticle(optionalArticle.get());
         Comment commentEntity = form.toEntity();
         log.info(commentEntity.toString());
 
