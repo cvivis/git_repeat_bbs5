@@ -1,14 +1,14 @@
-<!--{{>layouts/header}}-->
-<!--{{#article}}-->
-<!--    <form action="/articles/{{id}}/update" method="post">-->
-<!--        <input type="text" name="title" value="{{title}}" />-->
-<!--    <br>-->
-<!--        <textarea rows="3" name="content">{{content}}</textarea>-->
-<!--            <input-->
-<!--{{/article}}-->
-<!--         type="submit" class="btn btn-primary" />-->
-<!--</form>-->
-<!--<br>-->
-<!--<a href="/articles/{{id}}" class="btn btn-primary" >1개 조회 페이지</a>-->
-<!--<a href="/articles" class="btn btn-primary" >목록</a>-->
-<!--{{>layouts/footer}}-->
+{{>layouts/header}}
+{{#article}}
+    <form action="/articles/{{id}}/update" method="post">
+        <input type="text" name="title" value="{{title}}" />
+    <br>
+        <textarea rows="3" name="content">{{content}}</textarea>
+            <input
+{{/article}}
+         type="submit" class="btn btn-primary" />
+</form>
+<br>
+<a href="/articles/{{id}}" class="btn btn-primary" >1개 조회 페이지</a>
+<a href="/articles" class="btn btn-primary" >목록</a>
+{{>layouts/footer}}

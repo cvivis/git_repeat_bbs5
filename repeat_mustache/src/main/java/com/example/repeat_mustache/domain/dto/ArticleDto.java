@@ -1,18 +1,18 @@
 package com.example.repeat_mustache.domain.dto;
 
 import com.example.repeat_mustache.domain.entity.Article;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class ArticleDto {
-//    private Long id;
+    private Long id;
     private String title;
     private String content;
 
-    public ArticleDto( String title, String content) {
-//        this.id = id;
-        this.title = title;
-        this.content = content;
+    public Article toEntity(Long id){
+        return new Article(id, this.title,this.content);
     }
 
     public Article toEntity(){

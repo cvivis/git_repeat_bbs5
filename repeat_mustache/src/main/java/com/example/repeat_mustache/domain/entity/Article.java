@@ -1,4 +1,5 @@
 package com.example.repeat_mustache.domain.entity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "article3")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Article {
 
     @Id
@@ -24,4 +26,5 @@ public class Article {
         this.title = title;
         this.content = content;
     }
+
 }
