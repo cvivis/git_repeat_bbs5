@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,6 +43,12 @@ public class ArticleController {
         }
     }
 
+    @GetMapping("/list")
+    public String getList(Model model){
+        List<Article> articleList = articleRepository.findAll();
+        model.addAttribute("articles",articleList);
+        return "articles/list";
+    }
 
 
     @PostMapping(value = "/posts")
