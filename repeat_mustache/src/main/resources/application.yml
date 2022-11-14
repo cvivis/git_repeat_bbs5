@@ -7,12 +7,12 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://localhost:8080/likelion-db
-#      username: qwer
-#      password: qwer
-    url: jdbc:mysql://ec2-13-209-46-226.ap-northeast-2.compute.amazonaws.com:3306/likelion
-    username: cvivis
-    password: hsy0408
+    url: jdbc:mysql://localhost:8080/likelion-db
+    username: qwer  SPRING_DATASOURCE_URL=jdbc:mysql://ec2-13-209-46-226.ap-northeast-2.compute.amazonaws.com:3306/likelion;SPRING_DATASOURCE_PASSWORD=hsy0408;SPRING_DATASOURCE_USERNAME=cvivis
+    password: qwer
+#    url: jdbc:mysql://ec2-13-209-46-226.ap-northeast-2.compute.amazonaws.com:3306/likelion
+#    username: cvivis
+#    password: hsy0408
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
