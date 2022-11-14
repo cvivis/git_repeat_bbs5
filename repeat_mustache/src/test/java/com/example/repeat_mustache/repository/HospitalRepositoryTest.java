@@ -60,7 +60,7 @@ class HospitalRepositoryTest {
     void findByTotalNumberOfBedsBetween() {
         int num = 10;
         int num2 = 20;
-        List<Hospital> hospitals = hospitalRepository.findByTotalNumberOfBedsBetween(num,num2);
+        List<Hospital> hospitals = hospitalRepository.findByPatientRoomCountBetween(num,num2);
         for (Hospital hospital : hospitals){
             System.out.println(hospital.getHospitalName() + ": " + hospital.getTotalNumberOfBeds() + " (" + hospital.getRoadNameAddress() + ")");
         }
