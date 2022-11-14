@@ -10,6 +10,7 @@ public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
 
     List<Hospital>  findByRoadNameAddressContainingAndHospitalNameContaining(String roadNameAddress,String hospitalName);
 
-
     List<Hospital> findByRoadNameAddressContainingAndBusinessTypeNameIn(String roadNameAddress, List<String> businessTypeName); // In -> list로 들어온 값의 하나라도 일치하면 조회
+
+    List<Hospital> findByTotalNumberOfBedsBetween(int num, int num2);
 }
