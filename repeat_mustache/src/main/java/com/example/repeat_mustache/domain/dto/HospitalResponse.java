@@ -1,13 +1,11 @@
 package com.example.repeat_mustache.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder // 순서 상관없이 셋 가능
 public class HospitalResponse {
     private Integer id;
     private String roadNameAddress;
