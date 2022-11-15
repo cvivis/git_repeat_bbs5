@@ -8,21 +8,15 @@
     </tr>
     </thead>
     <tbody>
-    {{#hospitals}}
+    {{#searchList}}
         <tr>
             <th scope="row">{{id}}</th>
             <td>{{hospitalName}}</td>
             <td>{{roadNameAddress}}</td>
         </tr>
-    {{/hospitals}}
+    {{/searchList}}
     </tbody>
 </table>
-<form action="/hospitals/search" method="GET">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
-        <button class="btn btn-secondary">검색</button>
-    </div>
-</form>
 <ul class="pagination justify-content-center">
     <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</li>
     <li class="page-item"><a class="page-link" href="?page={{next}}">Next</li>

@@ -1,5 +1,7 @@
 package com.example.repeat_mustache.domain.entity;
 
+import com.example.repeat_mustache.domain.dto.HospitalResponse;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,5 +49,22 @@ public class Hospital {
 
     public String getBusinessTypeName() {
         return businessTypeName;
+    }
+
+    public static HospitalResponse of(Hospital hospital){
+        return new HospitalResponse(hospital.getId(), hospital.getHospitalName(),hospital.getBusinessTypeName());
+    }
+
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "id=" + id +
+                ", roadNameAddress='" + roadNameAddress + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", patientRoomCount=" + patientRoomCount +
+                ", totalNumberOfBeds=" + totalNumberOfBeds +
+                ", totalAreaSize=" + totalAreaSize +
+                ", businessTypeName='" + businessTypeName + '\'' +
+                '}';
     }
 }
