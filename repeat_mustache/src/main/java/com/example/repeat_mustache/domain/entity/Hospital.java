@@ -23,6 +23,8 @@ public class Hospital {
     private Float totalAreaSize;
     private String businessTypeName;
 
+    private Integer businessStatusCode;
+
     public Integer getId() {
         return id;
     }
@@ -52,7 +54,11 @@ public class Hospital {
     }
 
     public static HospitalResponse of(Hospital hospital){
-        return new HospitalResponse(hospital.getId(), hospital.getHospitalName(),hospital.getBusinessTypeName());
+        return new HospitalResponse(hospital.getId(), hospital.getRoadNameAddress(),hospital.getHospitalName(),hospital.getPatientRoomCount(),hospital.getTotalNumberOfBeds(),hospital.getBusinessTypeName(),hospital.getTotalAreaSize() );
+    }
+
+    public Integer getBusinessStatusCode() {
+        return businessStatusCode;
     }
 
     @Override
