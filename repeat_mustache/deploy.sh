@@ -1,8 +1,8 @@
-## 도커 이미지 이름
+## 도커 사용중이고 사용할 이미지 이름 
 #IMAGE_NAME="sb-bbs"
 IMAGE_NAME=$1
 
-## 컨테이너 이름 
+## 컨테이너 이름, docker ps -a 에서 동일한 이미지사용중인  확인 후 docker rm {컨테이너 아이디}
 CONTAINER_NAME=$IMAGE_NAME
 
 ## AWS 설정
@@ -10,7 +10,10 @@ URL=$2
 USERNAME=$3
 PASSWORD=$4
 
+## 사용포트
 PORT=$5
+##예시
+## sh deploy.sh sb-bbs jdbc:mysql://ec2-13-209-46-226.ap-northeast-2.compute.amazonaws.com:3306/likelion {유저네임} {비번} 8080
 
 echo "----------------------"
 echo "배포를 시작하겠습니다"
