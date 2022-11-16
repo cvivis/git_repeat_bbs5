@@ -1,5 +1,7 @@
 package com.example.repeat_mustache.service;
 
+import com.example.repeat_mustache.domain.dto.ArticleAddReq;
+import com.example.repeat_mustache.domain.dto.ArticleAddRes;
 import com.example.repeat_mustache.domain.dto.ArticleDto;
 import com.example.repeat_mustache.domain.entity.Article;
 import com.example.repeat_mustache.repository.ArticleRepository;
@@ -25,7 +27,19 @@ public class ArticleService { // 하위 레이어의 의존성을 주입받아�
                 .title(articles.getTitle())
                 .content(articles.getContent())
                 .build();
+
         return article;
     }
 
+    public ArticleAddRes addArticle(ArticleAddReq articleAddReq) {
+        Article articleEntity = articleAddReq.toEntity();
+
+        Article saved = articleRepository.save(articleEntity);
+        ArticleAddRes articleAddRes = ArticleAddRes.builder()
+                .id(saved.getId())
+                .title(saved.getTitle())
+                .content(saved.getContent())
+                .build();
+        return articleAddRes;
+    }
 }

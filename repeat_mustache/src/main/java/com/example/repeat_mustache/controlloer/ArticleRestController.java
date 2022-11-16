@@ -1,6 +1,9 @@
 package com.example.repeat_mustache.controlloer;
 
+import com.example.repeat_mustache.domain.dto.ArticleAddReq;
+import com.example.repeat_mustache.domain.dto.ArticleAddRes;
 import com.example.repeat_mustache.domain.dto.ArticleDto;
+import com.example.repeat_mustache.domain.entity.Article;
 import com.example.repeat_mustache.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/articles")
+@RequestMapping("/api/v1/articles")
 public class ArticleRestController {
 
     private final ArticleService articleService;
@@ -36,17 +39,6 @@ public class ArticleRestController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ArticleDto> getIdPage(@PathVariable Long id, Model model){
-//        Optional<Article> optArticle = articleRepository.findById(id); // null 값이 들어와도 nullPointExecption 발생 X
-//        if (!optArticle.isEmpty()) { // null 이 아닐때
-//            // Optional.get() ---> Article
-//            List<Comment> comments = commentRepository.findByArticleId(id);
-//            model.addAttribute("article", optArticle.get()); // view article에 값 전달.
-//            model.addAttribute("comments",comments);
-//
-//            return "articles/show";
-//        } else {
-//            return "articles/error";
-//        }
         ArticleDto articleDto = articleService.getArticle(id);
         return ResponseEntity.ok().body(articleDto);
     }
@@ -89,17 +81,11 @@ public class ArticleRestController {
 //        return "redirect:/articles/";
 //    }
 //
-//    @PostMapping(value = "/posts")
-//    public String createArticle(ArticleDto form){
-//        log.info(form.toString());
-//
-//        Article articleEntity = form.toEntity();
-//        log.info(articleEntity.toString());
-//
-//        Article saved = articleRepository.save(articleEntity);
-//        log.info("generatedId:{}", saved.getId());
-//        return "redirect:/articles/" + saved.getId();
-//    }
+    @PostMapping("")
+    public ResponseEntity<ArticleAddRes> addArticle(@RequestBody ArticleAddReq articleAddReq){
+        ArticleAddRes articleAddRes = articleService.addArticle(articleAddReq);
+        return ResponseEntity.ok().body(articleAddRes);
+    }
 //
 ////    @GetMapping("/{id}/comments")
 ////    public String getComment(@PathVariable Long id,Model model){
