@@ -32,14 +32,14 @@ public class ArticleService { // 하위 레이어의 의존성을 주입받아�
     }
 
     public ArticleAddRes addArticle(ArticleAddReq articleAddReq) {
-        Article articleEntity = articleAddReq.toEntity();
-
-        Article saved = articleRepository.save(articleEntity);
-        ArticleAddRes articleAddRes = ArticleAddRes.builder()
-                .id(saved.getId())
-                .title(saved.getTitle())
-                .content(saved.getContent())
-                .build();
-        return articleAddRes;
+//        Article articleEntity = articleAddReq.toEntity();
+        return new ArticleAddRes(23l,"test1","test1");
+//        Article saved = articleRepository.save(articleEntity);
+//        ArticleAddRes articleAddRes = ArticleAddRes.builder()
+//                .id(saved.getId())
+//                .title(saved.getTitle())
+//                .content(saved.getContent())
+//                .build();
+//        return articleAddRes;
     }
 }

@@ -9,6 +9,7 @@ import com.example.repeat_mustache.service.HospitalService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -36,6 +38,10 @@ class ArticleRestControlloerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+//    private fun <T> any(): T {
+//        Mockito.any<T>()
+//        return null as T
+//    }
 
     @Test
     @DisplayName("1개의 Json 형태로 Res 가 잘 오는지")
@@ -63,14 +69,14 @@ class ArticleRestControlloerTest {
         //id: '6', content '내용이 넣깅', title '우왕'
     void addTest() throws Exception {
         ArticleAddReq articleAddReq = new ArticleAddReq("test1", "test1");
-        ArticleAddRes articleAddRes = new ArticleAddRes(23L,articleAddReq.getTitle(), articleAddReq.getContent());
+        ArticleAddRes articleAddRes = new ArticleAddRes(23l,articleAddReq.getTitle(), articleAddReq.getContent());
 
-        given(articleService.addArticle(articleAddReq)).willReturn(articleAddRes);
+        given(articleService.addArticle(any())).willReturn(articleAddRes);
 
         String str= objectMapper.writeValueAsString(articleAddReq);
         System.out.println("str: "+str);
         String url = String.format("/api/v1/articles");
-        mockMvc.perform(post(url).content(str).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post(url).contentType(MediaType.APPLICATION_JSON).content(str))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.title").value("test1"))

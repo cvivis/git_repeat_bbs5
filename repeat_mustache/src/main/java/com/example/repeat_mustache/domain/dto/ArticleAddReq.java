@@ -3,11 +3,13 @@ package com.example.repeat_mustache.domain.dto;
 import com.example.repeat_mustache.domain.entity.Article;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class ArticleAddReq {
     private String title;
     private String content;
