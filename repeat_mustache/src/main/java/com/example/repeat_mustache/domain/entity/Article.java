@@ -1,4 +1,5 @@
 package com.example.repeat_mustache.domain.entity;
+import com.example.repeat_mustache.domain.dto.ArticleDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,4 +36,6 @@ public class Article {
         this.title = title;
         this.content = content;
     }
+
+
 }
