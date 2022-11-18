@@ -11,14 +11,23 @@
     {{#searchList}}
         <tr>
             <th scope="row">{{id}}</th>
-            <td>{{hospitalName}}</td>
+            <td><a href="/api/v1/hospitals/{{id}}">{{hospitalName}}</a></td>
             <td>{{roadNameAddress}}</td>
         </tr>
     {{/searchList}}
     </tbody>
 </table>
+
 <ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</li>
-    <li class="page-item"><a class="page-link" href="?page={{next}}">Next</li>
+    {{#keyword}}
+        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{previous}}">Previous</li>
+        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{next}}">Next</li>
+    {{/keyword}}
 </ul>
+
+
+<!--<ul class="pagination justify-content-center">-->
+<!--    <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</li>-->
+<!--    <li class="page-item"><a class="page-link" href="?page={{next}}">Next</li>-->
+<!--</ul>-->
 {{>layouts/footer}}

@@ -3,6 +3,7 @@ package com.example.repeat_mustache.domain.entity;
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Table(name = "hospitals")
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Hospital {
     @Id
     private Integer id;

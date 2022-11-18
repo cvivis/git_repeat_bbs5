@@ -38,7 +38,7 @@ public class HospitalController {
 
     @GetMapping("/search")
     public String search(Model model, String keyword, @PageableDefault(size = 10) Pageable pageable){
-        List<Hospital> searchList = hospitalRepository.findByRoadNameAddressContaining(keyword,pageable);
+        Page<Hospital> searchList = hospitalRepository.findByRoadNameAddressContaining(keyword,pageable);
         System.out.println(keyword);
 //        System.out.println(searchList.toString());
         model.addAttribute("searchList",searchList);

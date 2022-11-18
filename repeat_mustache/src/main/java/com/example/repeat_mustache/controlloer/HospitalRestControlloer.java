@@ -4,16 +4,20 @@ import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import com.example.repeat_mustache.domain.entity.Hospital;
 import com.example.repeat_mustache.repository.HospitalRepository;
 import com.example.repeat_mustache.service.HospitalService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
-@RestController
+@Controller
+//@RestController return 이 res,response여야 하는
 @RequestMapping("/api/v1/hospitals") //
 public class HospitalRestControlloer {
 
@@ -33,5 +37,26 @@ public class HospitalRestControlloer {
     public ResponseEntity<HospitalResponse> get(@PathVariable Integer id){
         HospitalResponse hospitalRes = hospitalService.getHospital(id);
         return ResponseEntity.ok().body(hospitalRes);
+    }
+
+    @GetMapping("")
+    public String list(Model model, @PageableDefault(size = 10, sort = "id") Pageable pageable) {
+//        Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
+        Page<Hospital> hospitals = hospitalService.getHospitalList(pageable);
+        model.addAttribute("hospitals", hospitals);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        return "hospitals/list";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam String keyword, @PageableDefault(size = 10, sort = "id")Pageable pageable){
+        Page<Hospital> searchList = hospitalService.findHospitalList(keyword,pageable);
+        System.out.println(keyword);
+        model.addAttribute("searchList",searchList);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("keyword",keyword );
+        return "hospitals/search";
     }
 }

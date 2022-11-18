@@ -3,8 +3,11 @@ package com.example.repeat_mustache.service;
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import com.example.repeat_mustache.domain.entity.Hospital;
 import com.example.repeat_mustache.repository.HospitalRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,4 +34,10 @@ public class HospitalService { // 하위 레이어의 의존성을 주입받아�
             return hospitalRes;
     }
 
+    public Page<Hospital> getHospitalList(Pageable pageable) {
+        return hospitalRepository.findAll(pageable);
+    }
+    public Page<Hospital> findHospitalList(String keyword,Pageable pageable) {
+         return hospitalRepository.findByRoadNameAddressContaining(keyword,pageable);
+    }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -47,9 +48,17 @@ class HospitalServiceTest {
                 .businessStatusCode(13)
                 .build();
 
+        Hospital res1 = Hospital.builder()
+                .id(718457)
+                .businessStatusCode(3)
+                .build();
+
+        Mockito.when(hospitalRepository.findById(any()))
+                .thenReturn(Optional.of(res1));
+        HospitalResponse closedHospitalResponse = hospitalService.getHospital(71857);
+        assertEquals("폐업", closedHospitalResponse.getBusinessStatusCodeName());
+
         Mockito.when(hospitalRepository.findById(id)).thenReturn(Optional.of(res)); // repository 코드 확인
-
-
         HospitalResponse hospitalResponse = hospitalService.getHospital(id);
         Assertions.assertEquals(hospitalResponse.getBusinessStatusCodeName(),"영업중"); // 서비스 확인
         verify(hospitalRepository).findById(id);

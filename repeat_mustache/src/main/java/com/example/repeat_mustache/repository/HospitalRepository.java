@@ -2,13 +2,14 @@ package com.example.repeat_mustache.repository;
 
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import com.example.repeat_mustache.domain.entity.Hospital;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface HospitalRepository extends JpaRepository<Hospital, Integer> {
-    List<Hospital>  findByRoadNameAddressContaining(String roadNameAddress, Pageable pageable);
+    Page<Hospital> findByRoadNameAddressContaining(String roadNameAddress, Pageable pageable);
 
     List<Hospital>  findByRoadNameAddressContainingAndHospitalNameContaining(String roadNameAddress,String hospitalName);
 
