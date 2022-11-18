@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8085
   servlet:
     encoding:
       force-response: true
@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:8080/likelion-db
-    username: qwer
+    username: qwer  SPRING_DATASOURCE_URL=jdbc:mysql://ec2-13-209-46-226.ap-northeast-2.compute.amazonaws.com:3306/likelion;SPRING_DATASOURCE_PASSWORD=hsy0408;SPRING_DATASOURCE_USERNAME=cvivis
     password: qwer
 
   jpa:
