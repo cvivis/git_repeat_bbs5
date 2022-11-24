@@ -11,12 +11,20 @@
     {{#searchList}}
         <tr>
             <th scope="row">{{id}}</th>
-            <td><a href="/api/v1/hospitals/{{id}}">{{hospitalName}}</a></td>
+            <td><a href="/hospitals/{{id}}">{{hospitalName}}</a></td>
             <td>{{roadNameAddress}}</td>
         </tr>
     {{/searchList}}
     </tbody>
 </table>
+<form action="/hospitals/search" method="GET">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        {{#keyword}}
+        <input name="keyword" type="text" value="{{keyword}}" placeholder="검색어를 입력해주세요">
+        {{/keyword}}
+        <button class="btn btn-secondary">검색</button>
+    </div>
+</form>
 
 <ul class="pagination justify-content-center">
     {{#keyword}}

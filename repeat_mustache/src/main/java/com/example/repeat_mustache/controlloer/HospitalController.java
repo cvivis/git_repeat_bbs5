@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/hospitals")
+@RequestMapping("/api/v1/hospitals")
 @Slf4j
 public class HospitalController {
     private final HospitalRepository hospitalRepository;

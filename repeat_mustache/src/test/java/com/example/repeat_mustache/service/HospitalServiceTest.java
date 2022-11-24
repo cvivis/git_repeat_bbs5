@@ -8,17 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class HospitalServiceTest {
 
@@ -29,7 +26,7 @@ class HospitalServiceTest {
 
     @BeforeEach
     public void setUpTest(){
-        hospitalService = new HospitalService(hospitalRepository);
+//        hospitalService = new HospitalService(hospitalRepository, hospitalReviewRepository);
     }
 
     //{"id":2,"roadNameAddress":"광주광역시 북구 설죽로 518, 2층 (일곡동)","hospitalName":"일곡부부치과의원","patientRoomCount":0,"totalNumberOfBeds":0,"businessTypeName":"치과의원","totalAreaSize":200.0,"businessStatusCodeName":"영업중"}

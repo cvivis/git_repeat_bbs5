@@ -1,6 +1,9 @@
 package com.example.repeat_mustache.controlloer;
 
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
+import com.example.repeat_mustache.domain.dto.HospitalReviewDto;
+import com.example.repeat_mustache.domain.entity.Article;
+import com.example.repeat_mustache.domain.entity.Comment;
 import com.example.repeat_mustache.domain.entity.Hospital;
 import com.example.repeat_mustache.repository.HospitalRepository;
 import com.example.repeat_mustache.service.HospitalService;
@@ -18,7 +21,7 @@ import java.util.Optional;
 
 @Controller
 //@RestController return 이 res,response여야 하는
-@RequestMapping("/api/v1/hospitals") //
+@RequestMapping("/hospitals") //
 public class HospitalRestControlloer {
 
 //    private final HospitalRepository hospitalRepository; // 의존성 주입 좋지 못한 관계 -> 레이어드 아키텍쳐로 리팩토
@@ -34,9 +37,12 @@ public class HospitalRestControlloer {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<HospitalResponse> get(@PathVariable Integer id){
+    public String get(Model model , @PathVariable Integer id){
         HospitalResponse hospitalRes = hospitalService.getHospital(id);
-        return ResponseEntity.ok().body(hospitalRes);
+        model.addAttribute("hospital",hospitalRes);
+//        List<HospitalReviewDto> reviews =
+//        model.addAttribute("comments",comments);
+        return "hospitals/hospital";
     }
 
     @GetMapping("")
@@ -58,5 +64,11 @@ public class HospitalRestControlloer {
         model.addAttribute("next", pageable.next().getPageNumber());
         model.addAttribute("keyword",keyword );
         return "hospitals/search";
+    }
+
+    @PostMapping("/{id}/reviews")
+    public String createReview(@PathVariable Integer id, HospitalReviewDto form){
+       long hospitalId = hospitalService.createReviews(id,form);
+        return "redirect:/hospitals/" + hospitalId;
     }
 }

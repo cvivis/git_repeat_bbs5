@@ -11,13 +11,13 @@
     {{#hospitals}}
         <tr>
             <th scope="row">{{id}}</th>
-            <td>{{hospitalName}}</td>
+            <td><a href="/hospitals/{{id}}">{{hospitalName}}</a></td>
             <td>{{roadNameAddress}}</td>
         </tr>
     {{/hospitals}}
     </tbody>
 </table>
-<form action="/api/v1/hospitals/search" method="GET">
+<form action="/hospitals/search" method="GET">
     <div class="btn-group" role="group" aria-label="Basic example">
         <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
         <button class="btn btn-secondary">검색</button>
@@ -27,4 +27,6 @@
     <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</li>
     <li class="page-item"><a class="page-link" href="?page={{next}}">Next</li>
 </ul>
+
+
 {{>layouts/footer}}

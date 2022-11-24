@@ -1,21 +1,25 @@
 package com.example.repeat_mustache.service;
 
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
+import com.example.repeat_mustache.domain.dto.HospitalReviewDto;
 import com.example.repeat_mustache.domain.entity.Hospital;
+import com.example.repeat_mustache.domain.entity.HospitalReview;
 import com.example.repeat_mustache.repository.HospitalRepository;
+import com.example.repeat_mustache.repository.HospitalReviewRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class HospitalService { // 하위 레이어의 의존성을 주입받아야한다. -> dao(repository)
     private final HospitalRepository hospitalRepository;
+    private final HospitalReviewRepository hospitalReviewRepository;
 
-    public HospitalService(HospitalRepository hospitalRepository) {
+    public HospitalService(HospitalRepository hospitalRepository, HospitalReviewRepository hospitalReviewRepository) {
         this.hospitalRepository = hospitalRepository;
+        this.hospitalReviewRepository = hospitalReviewRepository;
     }
 
     public HospitalResponse getHospital(Integer id){
@@ -39,5 +43,15 @@ public class HospitalService { // 하위 레이어의 의존성을 주입받아�
     }
     public Page<Hospital> findHospitalList(String keyword,Pageable pageable) {
          return hospitalRepository.findByRoadNameAddressContaining(keyword,pageable);
+    }
+
+    public long createReviews(Integer id, HospitalReviewDto form) {
+        Optional<Hospital> optionalHospital = hospitalRepository.findById(id);
+        System.out.println("ckeck: "+optionalHospital.get().toString());
+        form.setHospital(optionalHospital.get());
+        System.out.println("form: " + form.toString());
+        HospitalReview hospitalReview = form.toEntity();
+        HospitalReview saved = hospitalReviewRepository.save(hospitalReview);
+        return saved.getHospital().getId();
     }
 }

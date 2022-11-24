@@ -1,0 +1,49 @@
+{{>layouts/header}}
+<div class="layout ml-5">
+    {{#hospital}}
+        <div class="card mt-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">게시글 {{id}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{hospitalName}}</h6>
+                <p class="card-text"> {{roadNameAddress}}</p>
+                <a href="/hospitals/{{id}}/edit" class="btn btn-primary">Edit</a>
+                <a href="/hospitals/{{id}}/delete" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+
+    <form class="container" action="/hospitals/{{id}}/reviews" method="post">
+    {{/hospital}}
+    <div class="card mb-2 mt-5">
+        <div class="card-header bg-light">
+            <i class="fa fa-comment fa"></i> 리뷰창
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <textarea class="form-control" name="content" rows="3"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </li>
+                {{#comments}}
+                    <div class="card" >
+                        <div class="card-body">
+                            <p class="card-text">{{content}}</p>
+                        </div>
+                    </div>
+                {{/comments}}
+            </ul>
+        </div>
+        <!--        <ul class="list-group">-->
+        <!--            <li class="list-group-item">An item</li>-->
+        <!--            <li class="list-group-item">A second item</li>-->
+        <!--            <li class="list-group-item">A third item</li>-->
+        <!--            <li class="list-group-item">A fourth item</li>-->
+        <!--            <li class="list-group-item">And a fifth one</li>-->
+        <!--        </ul>-->
+    </div>
+</form>
+
+
+<!--</div>-->
+<!--<a href="/hospitals/new" class="btn btn-primary width = 5">new hospital</a>-->
+<!--<a href="/articles" class="btn btn-primary width = 5">list article</a>-->
+{{>layouts/footer}}

@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "hospitals")
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Hospital {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "road_name_address")
@@ -30,6 +29,9 @@ public class Hospital {
     private String businessTypeName;
 
     private Integer businessStatusCode;
+
+//    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
+//    private List<HospitalReview> reviews;
 
     public Integer getId() {
         return id;
