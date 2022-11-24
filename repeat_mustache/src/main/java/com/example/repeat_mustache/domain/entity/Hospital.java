@@ -4,6 +4,7 @@ import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,8 +31,9 @@ public class Hospital {
 
     private Integer businessStatusCode;
 
-//    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
-//    private List<HospitalReview> reviews;
+    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY) // mappedBy를 통해 외래키 관리를 한쪽에서 위임한다.
+    @ToString.Exclude // 없으면 순환참조가 발생할 수도 있다.
+    private List<HospitalReview> reviews;
 
     public Integer getId() {
         return id;
