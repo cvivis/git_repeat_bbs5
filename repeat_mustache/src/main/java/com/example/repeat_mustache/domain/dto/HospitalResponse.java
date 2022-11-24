@@ -1,6 +1,9 @@
 package com.example.repeat_mustache.domain.dto;
 
+import com.example.repeat_mustache.domain.entity.HospitalReview;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -16,7 +19,9 @@ public class HospitalResponse {
     private Float totalAreaSize;
     private String businessStatusCodeName;
 
-    public HospitalResponse(Integer id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize) {
+    private List<HospitalReview> reviews;
+
+    public HospitalResponse(Integer id, String roadNameAddress, String hospitalName, Integer patientRoomCount, Integer totalNumberOfBeds, String businessTypeName, Float totalAreaSize,List<HospitalReview> reviews) {
         this.id = id;
         this.roadNameAddress = roadNameAddress;
         this.hospitalName = hospitalName;
@@ -24,15 +29,31 @@ public class HospitalResponse {
         this.totalNumberOfBeds = totalNumberOfBeds;
         this.businessTypeName = businessTypeName;
         this.totalAreaSize = totalAreaSize;
+        this.reviews = reviews;
     }
-
-    public HospitalResponse(Integer id, String hospitalName, String businessTypeName) {
-        this.id = id;
-        this.hospitalName = hospitalName;
-        this.businessTypeName = businessTypeName;
-    }
+//
+//    public HospitalResponse(Integer id, String hospitalName, String businessTypeName) {
+//        this.id = id;
+//        this.hospitalName = hospitalName;
+//        this.businessTypeName = businessTypeName;
+//    }
 
     public void setBusinessCodeName(String businessStatusCodeName) {
         this.businessStatusCodeName = businessStatusCodeName;
+    }
+
+    @Override
+    public String toString() {
+        return "HospitalResponse{" +
+                "id=" + id +
+                ", roadNameAddress='" + roadNameAddress + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", patientRoomCount=" + patientRoomCount +
+                ", totalNumberOfBeds=" + totalNumberOfBeds +
+                ", businessTypeName='" + businessTypeName + '\'' +
+                ", totalAreaSize=" + totalAreaSize +
+                ", businessStatusCodeName='" + businessStatusCodeName + '\'' +
+                ", reviews=" + reviews +
+                '}';
     }
 }

@@ -5,14 +5,16 @@ import com.example.repeat_mustache.domain.entity.Comment;
 import com.example.repeat_mustache.domain.entity.Hospital;
 import com.example.repeat_mustache.domain.entity.HospitalReview;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @Setter
+@Builder
 public class HospitalReviewDto {
-    private Integer HospitalReviewId;
+    private Long HospitalReviewId;
     private String content;
 
     private Hospital hospital;

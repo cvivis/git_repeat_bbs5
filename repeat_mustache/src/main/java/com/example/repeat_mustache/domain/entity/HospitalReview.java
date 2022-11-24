@@ -29,4 +29,5 @@ public class HospitalReview {
         this.content = content;
         this.hospital = hospital;
     }
+
 }

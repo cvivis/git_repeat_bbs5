@@ -12,7 +12,6 @@
         </div>
 
     <form class="container" action="/hospitals/{{id}}/reviews" method="post">
-    {{/hospital}}
     <div class="card mb-2 mt-5">
         <div class="card-header bg-light">
             <i class="fa fa-comment fa"></i> 리뷰창
@@ -23,15 +22,16 @@
                     <textarea class="form-control" name="content" rows="3"></textarea>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </li>
-                {{#comments}}
+                {{#reviews}}
                     <div class="card" >
                         <div class="card-body">
                             <p class="card-text">{{content}}</p>
                         </div>
                     </div>
-                {{/comments}}
+                {{/reviews}}
             </ul>
         </div>
+    {{/hospital}}
         <!--        <ul class="list-group">-->
         <!--            <li class="list-group-item">An item</li>-->
         <!--            <li class="list-group-item">A second item</li>-->

@@ -35,6 +35,10 @@ public class Hospital {
     @ToString.Exclude // 없으면 순환참조가 발생할 수도 있다.
     private List<HospitalReview> reviews;
 
+    public List<HospitalReview> getReviews() {
+        return reviews;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -64,12 +68,13 @@ public class Hospital {
     }
 
     public static HospitalResponse of(Hospital hospital){
-        return new HospitalResponse(hospital.getId(), hospital.getRoadNameAddress(),hospital.getHospitalName(),hospital.getPatientRoomCount(),hospital.getTotalNumberOfBeds(),hospital.getBusinessTypeName(),hospital.getTotalAreaSize() );
+        return new HospitalResponse(hospital.getId(), hospital.getRoadNameAddress(),hospital.getHospitalName(),hospital.getPatientRoomCount(),hospital.getTotalNumberOfBeds(),hospital.getBusinessTypeName(),hospital.getTotalAreaSize(),hospital.getReviews());
     }
 
     public Integer getBusinessStatusCode() {
         return businessStatusCode;
     }
+
 
     @Override
     public String toString() {

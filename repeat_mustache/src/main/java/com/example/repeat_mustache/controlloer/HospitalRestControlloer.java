@@ -2,9 +2,11 @@ package com.example.repeat_mustache.controlloer;
 
 import com.example.repeat_mustache.domain.dto.HospitalResponse;
 import com.example.repeat_mustache.domain.dto.HospitalReviewDto;
+import com.example.repeat_mustache.domain.dto.HospitalReviewRes;
 import com.example.repeat_mustache.domain.entity.Article;
 import com.example.repeat_mustache.domain.entity.Comment;
 import com.example.repeat_mustache.domain.entity.Hospital;
+import com.example.repeat_mustache.domain.entity.HospitalReview;
 import com.example.repeat_mustache.repository.HospitalRepository;
 import com.example.repeat_mustache.service.HospitalService;
 import org.springframework.data.domain.Page;
@@ -39,6 +41,7 @@ public class HospitalRestControlloer {
     @GetMapping("/{id}")
     public String get(Model model , @PathVariable Integer id){
         HospitalResponse hospitalRes = hospitalService.getHospital(id);
+//        System.out.println(hospitalRes.getReviews().toString());
         model.addAttribute("hospital",hospitalRes);
 //        List<HospitalReviewDto> reviews =
 //        model.addAttribute("comments",comments);
@@ -65,6 +68,20 @@ public class HospitalRestControlloer {
         model.addAttribute("keyword",keyword );
         return "hospitals/search";
     }
+
+    @GetMapping("/reviews/{id}")
+    public ResponseEntity<HospitalReviewRes> getReviewById(@PathVariable Long id){
+        HospitalReviewRes hospitalReview = hospitalService.getReviewById(id);
+        return ResponseEntity.ok().body(hospitalReview);
+    }
+
+    @GetMapping("/{id}/reviews")
+    public ResponseEntity<List<HospitalReviewRes>> getReviews(@PathVariable Integer id){
+        List<HospitalReviewRes> hospitalReview = hospitalService.getReviews(id);
+        return ResponseEntity.ok().body(hospitalReview);
+    }
+
+
 
     @PostMapping("/{id}/reviews")
     public String createReview(@PathVariable Integer id, HospitalReviewDto form){
